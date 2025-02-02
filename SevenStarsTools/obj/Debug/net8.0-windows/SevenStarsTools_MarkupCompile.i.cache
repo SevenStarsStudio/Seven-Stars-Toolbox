@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\remyg\Documents\Seven-Stars-Tools\SevenStarsTools\App.xaml
-21827867359
+21556834003
 
-7-1711775037
+738538878
 200-1962129529
-DoorGenerator.xaml;MainWindow.xaml;
+MainWindow.xaml;Tools\DoorGenerator.xaml;
 
 False
 
