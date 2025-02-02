@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:SevenStarsTools"
-    Title="Seven Stars Studio" Height="300" MinHeight="200" MaxHeight="700" Width="278" MinWidth="278" MaxWidth="278" Icon="/icon.ico" Background="#1b1a19">
+    Title="Seven Stars Studio" ResizeMode="NoResize" Height="300"  Width="278" Icon="/icon.ico" Background="#1b1a19">
 
     <!-- Main Grid -->
     <Grid>
