@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SevenStarsTools"
         mc:Ignorable="d"
-        Title="DoorGenerator" ResizeMode="NoResize" Height="500" Width="600" Icon="/icon.ico" Background="#1b1a19">
+        Title="DoorGenerator" ResizeMode="NoResize" Height="475" Width="600" Icon="/icon.ico" Background="#1b1a19">
     <Grid>
         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center">Door Generator</TextBlock>
         <Line Width="256"  Height="3" Margin="0,42,0,0" X1="0" Y1="0" X2="254" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
 
-        <Button x:Name="btnOpenFile" Click="btnOpenFile_Click" Content="Find File" RenderTransformOrigin="1.2,0.7" Height="32" Width="128" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,48,0,0"/>
+        <Button x:Name="btnOpenFile" Click="btnOpenFile_Click" Content="Find File" RenderTransformOrigin="1.2,0.7" Height="32" Width="128" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,48,0,0"/>
 
 
 
@@ -21,15 +21,12 @@
         <Button x:Name="btnGenerate" Click="btnGenerate_Click" Content="Generate File" RenderTransformOrigin="1.2,0.7" Height="32" Width="285" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,353,0,0"/>
         <Button x:Name="btnSave" Click="btnSave_Click" Content="Save" RenderTransformOrigin="1.2,0.7" Height="32" Width="290" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="307,353,0,0"/>
         <TextBlock Name="details" FontSize="16" HorizontalAlignment="Left" Margin="462,117,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="192" Width="128"/>
-
-        <TextBlock Height="32" Width="254" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,316,0,0" Text="Name : "/>
-        <TextBox Name="fileName" HorizontalAlignment="Left" Margin="259,316,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="331" Height="32"/>
-
-        <CheckBox x:Name="onsave_explorer_checkbox" Margin="338,388,28,20" IsChecked="True"
-        Content="Open Explorer on Save" />
-
         <Grid Background="LightGray" Name="generatedImageGrid" Margin="327,117,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="192" Width="128">
         </Grid>
+        <TextBlock Height="32" Width="135" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,316,0,0" Text="Name : "/>
+        <TextBox Name="fileName" HorizontalAlignment="Left" Margin="138,316,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="452" Height="32"/>
+
+        <CheckBox x:Name="onsave_explorer_checkbox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="338,388,28,20" IsChecked="True" Content="Open Explorer on Save" />
     </Grid>
 
 
