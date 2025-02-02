@@ -23,7 +23,8 @@ namespace SevenStarsTools
 
         private void btnClick_DoorMaker(object sender, RoutedEventArgs e)
         {
-
+            DoorGenerator doorGenerator = new DoorGenerator();
+            doorGenerator.Show();
         }
 
         private void btnClick_BannerGenerator(object sender, RoutedEventArgs e)
