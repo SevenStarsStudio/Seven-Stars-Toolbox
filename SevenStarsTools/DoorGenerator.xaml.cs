@@ -9,6 +9,9 @@ using Color = System.Drawing.Color;
 using System.Drawing;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace SevenStarsTools
 {
@@ -31,7 +34,7 @@ namespace SevenStarsTools
             InitializeComponent();
         }
 
-        private void btnOpenFile_Click(object sender, RoutedEventArgs e)
+        private void btnClick_findFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Select an image";
@@ -51,7 +54,7 @@ namespace SevenStarsTools
             }
         }
 
-        private void btnGenerate_Click(object sender, RoutedEventArgs e)
+        private void btnClick_generate(object sender, RoutedEventArgs e)
         {
             // Stopwatch
             Stopwatch sw = new Stopwatch();
@@ -130,14 +133,15 @@ namespace SevenStarsTools
             croppedImage.HorizontalAlignment = HorizontalAlignment.Left;
 
             Thickness margin = Margin;
-            margin.Top = croppedImage.Width * y;
-            margin.Left = croppedImage.Height * x;
+            margin.Top = croppedImage.Width * y + 1 * y;
+            margin.Left = croppedImage.Height * x + 1 * x;
             croppedImage.Margin = margin;
+            
 
             generatedImageGrid.Children.Add(croppedImage);
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void btnClick_save(object sender, RoutedEventArgs e)
         {
             if (generatedImages == null)
             {

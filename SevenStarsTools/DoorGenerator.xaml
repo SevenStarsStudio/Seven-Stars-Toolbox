@@ -5,21 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SevenStarsTools"
         mc:Ignorable="d"
-        Title="DoorGenerator" ResizeMode="NoResize" Height="475" Width="600" Icon="/icon.ico" Background="#1b1a19">
+        Title="Door Generator" ResizeMode="NoResize" Height="475" Width="600" Icon="/icon.ico" Background="#1b1a19">
     <Grid>
         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center">Door Generator</TextBlock>
         <Line Width="256"  Height="3" Margin="0,42,0,0" X1="0" Y1="0" X2="254" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
 
-        <Button x:Name="btnOpenFile" Click="btnOpenFile_Click" Content="Find File" RenderTransformOrigin="1.2,0.7" Height="32" Width="128" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,48,0,0"/>
-
-
+        <Button x:Name="btnFindFile" Click="btnClick_findFile" Content="Find File" RenderTransformOrigin="1.2,0.7" Height="32" Width="128" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,48,0,0"/>
 
         <TextBlock Height="32" Width="312" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,81,0,0" Text="Source File"/>
         <Image Name="sourceImage" Height="192" Width="128" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,113,0,0" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
 
         <TextBlock Height="32" Width="270" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="320,81,0,0" Text="Generated"/>
-        <Button x:Name="btnGenerate" Click="btnGenerate_Click" Content="Generate File" RenderTransformOrigin="1.2,0.7" Height="32" Width="285" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,353,0,0"/>
-        <Button x:Name="btnSave" Click="btnSave_Click" Content="Save" RenderTransformOrigin="1.2,0.7" Height="32" Width="290" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="307,353,0,0"/>
+        <Button x:Name="btnGenerate" Click="btnClick_generate" Content="Generate File" RenderTransformOrigin="1.2,0.7" Height="32" Width="285" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,353,0,0"/>
+        <Button x:Name="btnSave" Click="btnClick_save" Content="Save" RenderTransformOrigin="1.2,0.7" Height="32" Width="290" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="307,353,0,0"/>
         <TextBlock Name="details" FontSize="16" HorizontalAlignment="Left" Margin="462,117,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="192" Width="128"/>
         <Grid Background="LightGray" Name="generatedImageGrid" Margin="327,117,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="192" Width="128">
         </Grid>
@@ -29,21 +27,19 @@
         <CheckBox x:Name="onsave_explorer_checkbox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="338,388,28,20" IsChecked="True" Content="Open Explorer on Save" />
     </Grid>
 
-
-    <!-- Styles -->
+    <!-- STYLE -->
     <Window.Resources>
         <Style TargetType="{x:Type Window}">
-            <Setter Property="Background" Value="#1b1a19"/>
-            <Setter Property="Foreground" Value="#1b1a19"/>
-            <Setter Property="FontSize" Value="18" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="Courier New"/>
             <Setter Property="FontStyle" Value="Normal"/>
         </Style>
 
 
         <Style TargetType="{x:Type Button}">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Foreground" Value="#edc591"/>
-            <Setter Property="Background" Value="#1b1a19"/>
+            <Setter Property="Background" Value="#242221"/>
             <Setter Property="BorderBrush" Value="#43413e"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="FontSize" Value="18"/>
@@ -52,10 +48,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}">
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -94,5 +90,6 @@
         <Style TargetType="{x:Type Line}">
             <Setter Property="Stroke" Value="#edc591" />
         </Style>
+
     </Window.Resources>
 </Window>
