@@ -5,20 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SevenStarsTools"
         
-        Title="Banner Generator" ResizeMode="NoResize" Height="800" Width="600" Icon="/icon.ico" Background="#1b1a19" >
+        Title="Banner Generator" ResizeMode="NoResize" Height="1000" Width="600" Icon="/icon.ico" Background="#1b1a19" >
     <Grid>
         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center">Banner Generator</TextBlock>
         <Line Width="256"  Height="3" Margin="0,42,0,0" X1="0" Y1="0" X2="254" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
 
-        <Button x:Name="btnOpenExplorerShieldSourceTemplate" Click="btn_openExplorer_shieldSourceTemplate" Content="Find Shield Source Template" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,48,0,0"/>
-        <Button x:Name="btnOpenExplorerShieldTemplate" Click="btn_openExplorer_shieldTemplate" Content="Find Shield Template" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,48,0,0"/>
-        <Image Name="shieldSourceTemplate" Height="128" Width="128" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="50,85,0,0" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
-        <Image Name="shieldTemplate" Height="128" Width="128" HorizontalAlignment="Right" VerticalAlignment="Top"  Margin="0,85,50,0" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+        <Button x:Name="btnOpenExplorerShieldSourceTemplate" Click="btn_openExplorer_shieldSourceTemplate" Content="Select Shield Source" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,50,0,0"/>
+        <Button x:Name="btnOpenExplorerShieldTemplate" Click="btn_openExplorer_shieldTemplate" Content="Select Shield Template" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,50,30,0"/>
+        <Grid Background="#242221" Name="shieldSourceBackground" Margin="-256,90,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="128" Width="128">
+            <Image Name="shieldSourceTemplate" Height="128" Width="128" HorizontalAlignment="Left" VerticalAlignment="Top" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+        </Grid>
+        <Grid Background="#242221" Name="shieldTemplateBackground" Margin="256,90,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="128" Width="128">
+            <Image Name="shieldTemplate" Height="128" Width="128" HorizontalAlignment="Left" VerticalAlignment="Top" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+        </Grid>
 
-        <Line Width="500"  Height="1" Margin="0,230,0,0" X1="0" Y1="0" X2="500" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
-        <Button x:Name="btn_openExplorerShieldFiles" Click="btn_openExplorer_shieldFiles" Content="Find Shields" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,240,0,0"/>
+        <Line Width="512"  Height="1" Margin="0,230,0,0" X1="0" Y1="0" X2="512" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
+        <Button x:Name="btn_openExplorerShieldFiles" Click="btn_openExplorer_shieldFiles" Content="Select Shields" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,240,0,0"/>
 
-        <Line Width="500"  Height="1" Margin="0,500,0,0" X1="0" Y1="0" X2="500" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
+        <Grid Background="#242221" Name="sourceImageGrid" Margin="0,280,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="256" Width="512">
+            <!-- GENERATED - SOURCE IMAGES -->
+        </Grid>
+
+        <Line Width="512"  Height="1" Margin="0,545,0,0" X1="0" Y1="0" X2="512" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
+
+        <Button x:Name="btn_generateShields" Click="btnClick_generateShields"  Content="Generate" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,553,0,0"/>
+        <Grid Background="#242221" Name="gemeratedImageGrid" Margin="0,593,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="256" Width="512">
+            <!-- GENERATED - CONVERTED IMAGES -->
+        </Grid>
 
     </Grid>
 

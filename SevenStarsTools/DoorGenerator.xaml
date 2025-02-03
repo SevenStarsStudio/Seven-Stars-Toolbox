@@ -13,13 +13,14 @@
         <Button x:Name="btnFindFile" Click="btnClick_findFile" Content="Find File" RenderTransformOrigin="1.2,0.7" Height="32" Width="128" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,48,0,0"/>
 
         <TextBlock Height="32" Width="312" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,81,0,0" Text="Source File"/>
-        <Image Name="sourceImage" Height="192" Width="128" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,113,0,0" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
-
+        <Grid Background="#242221" Name="sourceImageGrid" Margin="10,113,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="192" Width="128">
+            <Image Name="sourceImage" Height="192" Width="128" HorizontalAlignment="Left" VerticalAlignment="Top"   RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+        </Grid>
         <TextBlock Height="32" Width="270" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="320,81,0,0" Text="Generated"/>
         <Button x:Name="btnGenerate" Click="btnClick_generate" Content="Generate File" RenderTransformOrigin="1.2,0.7" Height="32" Width="285" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,353,0,0"/>
         <Button x:Name="btnSave" Click="btnClick_save" Content="Save" RenderTransformOrigin="1.2,0.7" Height="32" Width="290" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="307,353,0,0"/>
         <TextBlock Name="details" FontSize="16" HorizontalAlignment="Left" Margin="462,117,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="192" Width="128"/>
-        <Grid Background="LightGray" Name="generatedImageGrid" Margin="327,117,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="192" Width="128">
+        <Grid Background="#242221" Name="generatedImageGrid" Margin="327,117,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="192" Width="128">
         </Grid>
         <TextBlock Height="32" Width="135" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,316,0,0" Text="Name : "/>
         <TextBox Name="fileName" HorizontalAlignment="Left" Margin="138,316,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="452" Height="32"/>

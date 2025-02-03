@@ -1,17 +1,10 @@
 ﻿using Microsoft.Win32;
 using System.Diagnostics;
-using System.IO;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Windows.Media;
-using Image = System.Windows.Controls.Image;
 using Color = System.Drawing.Color;
-using System.Drawing;
-using System.Windows.Interop;
-using System.Runtime.InteropServices;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Controls;
+using Image = System.Windows.Controls.Image;
 
 namespace SevenStarsTools
 {
@@ -89,7 +82,7 @@ namespace SevenStarsTools
             generatedImageGrid.Children.Clear();
             generatedImages = new BitmapSource[xNodeAmount, yNodeAmount];
 
-            PixelColor[,] pixels = GetPixels((BitmapSource)sourceRawImage.Source);
+            ImageUtils.PixelColor[,] pixels = ImageUtils.GetPixels((BitmapSource)sourceRawImage.Source);
 
 
             for (int x = 0; x < xNodeAmount; x++)
@@ -103,12 +96,12 @@ namespace SevenStarsTools
                     {
                         for (int pixelY = 0; pixelY < HEIGHT; pixelY++)
                         {
-                            PixelColor pixelColor = pixels[pixelX + (WIDTH * x), pixelY + (HEIGHT * y)];
+                            ImageUtils.PixelColor pixelColor = pixels[pixelX + (WIDTH * x), pixelY + (HEIGHT * y)];
                             Color color = Color.FromArgb(pixelColor.Alpha, pixelColor.Red, pixelColor.Green, pixelColor.Blue);
                             myBitmap.SetPixel(pixelX, pixelY, color);
                         }
                     }
-                    generatedImages[x, y] = GetBitmapSource(myBitmap);
+                    generatedImages[x, y] = ImageUtils.GetBitmapSource(myBitmap);
                     addBitmapImageToCanvas(x, y);
                 }
             }
@@ -160,7 +153,8 @@ namespace SevenStarsTools
                     for (int y = generatedImages.GetLength(1) - 1; y >= 0; y--)
                     {
                         string path = saveDialog.FolderName + $"/{fileName.Text}{count}";
-                        saveImage(x, y, path);
+                        ImageUtils.SaveBitmapImage(x, y, path, (BitmapImage)generatedImages[x, y]);
+
                         count++;
                     }
                 }
@@ -170,77 +164,6 @@ namespace SevenStarsTools
                     Process.Start("explorer.exe", saveDialog.FolderName);
                 }
             }
-        }
-
-        private void saveImage(int x, int y, string path)
-        {
-            BitmapSource bitmap = generatedImages[x, y];
-
-
-            using (FileStream stream = File.Create(path + ".png"))
-            {
-                PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
-                pngEncoder.Frames.Clear();
-                pngEncoder.Frames.Add(BitmapFrame.Create(bitmap));
-                pngEncoder.Save(stream);
-            }
-
-        }
-        [StructLayout(LayoutKind.Explicit)]
-        public struct PixelColor
-        {
-            // 32 bit BGRA 
-            [FieldOffset(0)] public UInt32 ColorBGRA;
-            // 8 bit components
-            [FieldOffset(0)] public byte Blue;
-            [FieldOffset(1)] public byte Green;
-            [FieldOffset(2)] public byte Red;
-            [FieldOffset(3)] public byte Alpha;
-        }
-        public PixelColor[,] GetPixels(BitmapSource source)
-        {
-            if (source.Format != PixelFormats.Bgra32)
-                source = new FormatConvertedBitmap(source, PixelFormats.Bgra32, null, 0);
-
-            int width = source.PixelWidth;
-            int height = source.PixelHeight;
-
-
-            PixelColor[,] result = new PixelColor[width, height];
-
-            var unsortedByteResults = new byte[height * width * 4];
-
-            source.CopyPixels(unsortedByteResults, width * 4, 0);
-            int count = 0;
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    result[x, y] = new PixelColor
-                    {
-                        Blue = unsortedByteResults[count + 0],
-                        Green = unsortedByteResults[count + 1],
-                        Red = unsortedByteResults[count + 2],
-                        Alpha = unsortedByteResults[count + 3]
-                    };
-                    count += 4;
-                }
-            }
-
-            return result;
-        }
-
-        public BitmapSource GetBitmapSource(Bitmap bitmap)
-        {
-            BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap
-            (
-                bitmap.GetHbitmap(),
-                IntPtr.Zero,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions()
-            );
-
-            return bitmapSource;
         }
     }
 }
