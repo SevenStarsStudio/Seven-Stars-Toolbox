@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace SevenStarsTools
+namespace SevenStarsToolbox
 {
     /// <summary>
     /// Interaction logic for App.xaml

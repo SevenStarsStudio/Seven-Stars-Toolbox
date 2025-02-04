@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 using Color = System.Drawing.Color;
 using Image = System.Windows.Controls.Image;
 
-namespace SevenStarsTools
+namespace SevenStarsToolbox
 {
     /// <summary>
     /// Interaction logic for DoorGenerator.xaml

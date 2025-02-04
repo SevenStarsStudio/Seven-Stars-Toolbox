@@ -5,9 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using static SevenStarsTools.ImageUtils;
+using static SevenStarsToolbox.ImageUtils;
 
-namespace SevenStarsTools
+namespace SevenStarsToolbox
 {
     /// <summary>
     /// Interaction logic for BannerGenerator.xaml
@@ -206,37 +206,46 @@ namespace SevenStarsTools
                 MessageBox.Show("Error : You need shields to convert before doing a conversion attempt.", "Banner Generator - Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                 return;
             }
-            for (int x = 0; x < shieldBitImagesTable.GetLength(0) && count < sourceShieldBitmaps.Count; x++)
+
+            try
             {
-                for (int y = 0; y < shieldBitImagesTable.GetLength(1) && count < sourceShieldBitmaps.Count; y++)
+                for (int x = 0; x < shieldBitImagesTable.GetLength(0) && count < sourceShieldBitmaps.Count; x++)
                 {
-                    Image? newImage = shieldBitImagesTable[x, y];
-                    if (newImage == null)
+                    for (int y = 0; y < shieldBitImagesTable.GetLength(1) && count < sourceShieldBitmaps.Count; y++)
                     {
-                        newImage = new Image();
+                        Image? newImage = shieldBitImagesTable[x, y];
+                        if (newImage == null)
+                        {
+                            newImage = new Image();
+                        }
+
+
+                        BitmapImage bitImage = ImageUtils.Convert(sourceShieldBitmaps[count], sourceGrids, templateGrids);
+                        convertedShieldBitmaps.Add(bitImage);
+                        newImage.Source = bitImage;
+                        newImage.Width = 128;
+                        newImage.Height = 128;
+
+                        RenderOptions.SetBitmapScalingMode(newImage, BitmapScalingMode.NearestNeighbor);
+
+                        newImage.VerticalAlignment = VerticalAlignment.Top;
+                        newImage.HorizontalAlignment = HorizontalAlignment.Left;
+
+                        Thickness margin = Margin;
+                        margin.Top = newImage.Width * x;
+                        margin.Left = newImage.Height * y;
+                        newImage.Margin = margin;
+                        newImage.SnapsToDevicePixels = true;
+
+                        gemeratedImageGrid.Children.Add(newImage);
+
+                        count++;
                     }
-
-                    BitmapImage bitImage = ImageUtils.Convert(sourceShieldBitmaps[count], sourceGrids, templateGrids);
-                    convertedShieldBitmaps.Add(bitImage);
-                    newImage.Source = bitImage;
-                    newImage.Width = 128;
-                    newImage.Height = 128;
-
-                    RenderOptions.SetBitmapScalingMode(newImage, BitmapScalingMode.NearestNeighbor);
-
-                    newImage.VerticalAlignment = VerticalAlignment.Top;
-                    newImage.HorizontalAlignment = HorizontalAlignment.Left;
-
-                    Thickness margin = Margin;
-                    margin.Top = newImage.Width * x;
-                    margin.Left = newImage.Height * y;
-                    newImage.Margin = margin;
-                    newImage.SnapsToDevicePixels = true;
-
-                    gemeratedImageGrid.Children.Add(newImage);
-
-                    count++;
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error : Source and Template images might not have the same colors", "Banner Generator - Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
         }
         private void btnClick_save(object sender, RoutedEventArgs e)

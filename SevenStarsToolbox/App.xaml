@@ -1,7 +1,7 @@
-﻿<Application x:Class="SevenStarsTools.App"
+﻿<Application x:Class="SevenStarsToolbox.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SevenStarsTools"
+             xmlns:local="clr-namespace:SevenStarsToolbox"
              StartupUri="MainWindow.xaml"
              Startup="Application_Startup"
              >

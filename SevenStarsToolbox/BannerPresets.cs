@@ -1,6 +1,6 @@
 ﻿
 
-namespace SevenStarsTools
+namespace SevenStarsToolbox
 {
     internal enum BannerPresets
     {

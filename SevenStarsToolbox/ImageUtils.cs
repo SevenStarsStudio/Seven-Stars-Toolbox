@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -8,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Color = System.Drawing.Color;
 
-namespace SevenStarsTools
+namespace SevenStarsToolbox
 {
     public static class ImageUtils
     {
