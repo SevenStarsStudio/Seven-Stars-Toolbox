@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
@@ -6,7 +7,7 @@ using System.Windows.Media.Imaging;
 using Color = System.Drawing.Color;
 using Image = System.Windows.Controls.Image;
 
-namespace SevenStarsTools
+namespace SevenStarsToolbox
 {
     /// <summary>
     /// Interaction logic for DoorGenerator.xaml
@@ -25,6 +26,7 @@ namespace SevenStarsTools
         public DoorGenerator()
         {
             InitializeComponent();
+            version.Text = App.VERSION;
         }
 
         private void btnClick_findFile(object sender, RoutedEventArgs e)
