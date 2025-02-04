@@ -5,26 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SevenStarsToolbox"
         mc:Ignorable="d"
-        Title="Door Generator" ResizeMode="NoResize" Height="475" Width="600" Background="#1b1a19" Icon="/icon.ico">
+        Title="Door Generator" ResizeMode="NoResize" Height="512" Width="600" Background="#1b1a19" Icon="/icon.ico">
     <Grid>
-        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center">Door Generator</TextBlock>
-        <Line Width="256"  Height="3" Margin="0,42,0,0" X1="0" Y1="0" X2="254" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
-
-        <Button x:Name="btnFindFile" Click="btnClick_findFile" Content="Find File" RenderTransformOrigin="1.2,0.7" Height="32" Width="128" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,48,0,0"/>
-
-        <TextBlock Height="32" Width="312" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,81,0,0" Text="Source File"/>
-        <Grid Background="#242221" Name="sourceImageGrid" Margin="10,113,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="192" Width="128">
-            <Image Name="sourceImage" Height="192" Width="128" HorizontalAlignment="Left" VerticalAlignment="Top"   RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
-        </Grid>
-        <TextBlock Height="32" Width="270" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="320,81,0,0" Text="Generated"/>
-        <Button x:Name="btnGenerate" Click="btnClick_generate" Content="Generate File" RenderTransformOrigin="1.2,0.7" Height="32" Width="285" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,353,0,0"/>
-        <TextBlock Name="details" FontSize="16" HorizontalAlignment="Left" Margin="462,117,0,0" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="192" Width="128"/>
-        <Grid Background="#242221" Name="generatedImageGrid" Margin="327,117,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="192" Width="128">
-        </Grid>
-        <TextBlock Height="32" Width="135" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,316,0,0" Text="Name : "/>
-        <TextBox Name="fileName" HorizontalAlignment="Left" Margin="138,316,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="452" Height="32"/>
-        <Button x:Name="btnSave" Click="btnClick_save" Content="Save" RenderTransformOrigin="1.2,0.7" Height="32" Width="290" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="307,353,0,0"/>
-        <CheckBox x:Name="onsave_explorer_checkbox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="338,388,28,20" IsChecked="True" Content="Open Explorer on Save" />
+        <StackPanel>
+            <TextBlock HorizontalAlignment="Center">Door Generator</TextBlock>
+            <Line Width="256"  Height="3" Margin="0,5,0,0" X1="0" Y1="0" X2="254" Y2="0"  HorizontalAlignment="Center"></Line>
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*" />
+                    <ColumnDefinition  Width="70*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="10,0,0,0"  HorizontalAlignment="Left">
+                    <TextBlock  HorizontalAlignment="Center">Options</TextBlock>
+                    <Button x:Name="btnFindFile" Click="btnClick_findFile" Content="Select Door" Height="32" Width="128" Margin="15"/>
+                    <Button x:Name="btnGenerate" Click="btnClick_generate" Content="Generate" Height="32" Width="128" Margin="15, 0, 15,0"/>
+                    <TextBlock Height="32" FontSize="16" Text="Details" Margin="0,10,0,0"/>
+                    <TextBlock Name="details" FontSize="14"  TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Height="128" Width="128"/>
+                </StackPanel>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition  Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Height="32" Width="auto"  Text="Source" TextAlignment="Center"/>
+                        <Grid Background="#242221" Name="sourceImageGrid"  Height="192" Width="128">
+                            <Image Name="sourceImage" Height="192" Width="128" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Height="32" Width="auto"  Text="Generated" TextAlignment="Center"/>
+                        <Grid Background="#242221" Name="generatedImageGrid"  Height="192" Width="128">
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <StackPanel>
+                <Line Width="256"  Height="1" X1="0" Y1="0" X2="256" Y2="0" HorizontalAlignment="Center" Margin="15"></Line>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition  Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Height="32" Width="80" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Name:"/>
+                    <TextBox Grid.Column="0" Name="fileName" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="80,15,0,15" TextWrapping="Wrap" Text="" Width="220" Height="32"/>
+                    <StackPanel Grid.Column="1">
+                        <Button x:Name="btnSave" Click="btnClick_save" Content="Save" Height="32" Width="256"  HorizontalAlignment="Center" Margin="10"/>
+                        <CheckBox x:Name="onsave_explorer_checkbox" HorizontalAlignment="Center" Margin="0,0,0,0" IsChecked="True" Content="Open Explorer on Save" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
         <TextBlock x:Name="version" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10"></TextBlock>
     </Grid>
 
