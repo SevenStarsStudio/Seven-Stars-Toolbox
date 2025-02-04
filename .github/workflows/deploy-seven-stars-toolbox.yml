@@ -18,8 +18,25 @@ jobs:
          with:
            dotnet-versions: 8.0.x
 
-       - run: dotnet restore ${{ env.PROJECT_PATH }}
+       - name: Restoring
+         run: dotnet restore ${{ env.PROJECT_PATH }}
   
-       - run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
+       - name: Building
+         run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
        
-       - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishedSingleFile=true
+       - name: Deploying
+         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishedSingleFile=true --no-build
+
+       - uses: actions/create-release@v1
+         id: create_release
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         with:
+           tag_name: ${{ github.ref }}
+           release_name: ${{ github.ref }}
+
+       - uses: csexton/release-asset-actions@v2
+         with:
+           github-token: ${{ secrets.GITHUB_TOKEN }}
+           pattern: SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*exe
+           release-url: ${{ steps.create_release.outputs.upload_url}}
