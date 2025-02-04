@@ -55,6 +55,7 @@
                 <!-- GENERATED - CONVERTED IMAGES -->
             </Grid>
         </StackPanel>
+        <TextBlock x:Name="version" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10"></TextBlock>
     </Grid>
 
     <!-- STYLE -->

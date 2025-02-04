@@ -8,15 +8,10 @@ namespace SevenStarsTools
     /// </summary>
     public partial class App : Application
     {
+        public const String VERSION = "v1.0.0";
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 
-        }
-
-        public static void CopyImageToClipboard(BitmapImage image)
-        {
-            // Non transparancy
-            Clipboard.SetImage(image);
         }
     }
 

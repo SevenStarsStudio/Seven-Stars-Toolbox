@@ -17,6 +17,7 @@ namespace SevenStarsTools
         public BannerGenerator()
         {
             InitializeComponent();
+            version.Text = App.VERSION;
         }
 
         BitmapImage? sourceTemplateBitmap = null;

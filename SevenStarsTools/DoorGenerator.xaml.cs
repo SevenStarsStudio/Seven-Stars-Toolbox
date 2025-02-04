@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
@@ -25,6 +26,7 @@ namespace SevenStarsTools
         public DoorGenerator()
         {
             InitializeComponent();
+            version.Text = App.VERSION;
         }
 
         private void btnClick_findFile(object sender, RoutedEventArgs e)

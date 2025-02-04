@@ -25,6 +25,7 @@
         <TextBox Name="fileName" HorizontalAlignment="Left" Margin="138,316,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="452" Height="32"/>
         <Button x:Name="btnSave" Click="btnClick_save" Content="Save" RenderTransformOrigin="1.2,0.7" Height="32" Width="290" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="307,353,0,0"/>
         <CheckBox x:Name="onsave_explorer_checkbox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="338,388,28,20" IsChecked="True" Content="Open Explorer on Save" />
+        <TextBlock x:Name="version" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10"></TextBlock>
     </Grid>
 
     <!-- STYLE -->
