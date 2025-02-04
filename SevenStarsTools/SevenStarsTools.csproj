@@ -9,13 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Assets\**" />
-    <EmbeddedResource Remove="Assets\**" />
-    <None Remove="Assets\**" />
-    <Page Remove="Assets\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <None Remove="Assets\BannerPresets\heater_source_template.png" />
+    <None Remove="Assets\BannerPresets\heater_split_template.png" />
+    <None Remove="Assets\BannerPresets\kite_source_template.png" />
+    <None Remove="Assets\BannerPresets\kite_split_template.png" />
+    <None Remove="Assets\round_source_template.png" />
+    <None Remove="Assets\round_split_template.png" />
     <None Remove="icon.ico" />
   </ItemGroup>
 
@@ -24,6 +23,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\BannerPresets\heater_source_template.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\BannerPresets\heater_split_template.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\BannerPresets\kite_source_template.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\BannerPresets\kite_split_template.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\BannerPresets\round_source_template.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\BannerPresets\round_split_template.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="icon.ico" />
   </ItemGroup>
 

@@ -4,7 +4,6 @@ using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using static SevenStarsTools.ImageUtils;
 
@@ -20,17 +19,18 @@ namespace SevenStarsTools
             InitializeComponent();
         }
 
-        BitmapImage shieldSourceTemplateBitImage = null;
-        BitmapImage shieldSplitTemplateBitImage = null;
-        List<BitmapImage> shieldBitImages = null;
-        List<BitmapImage> convertedImages = null;
+        BitmapImage sourceTemplateBitmap = null;
+        BitmapImage conversionTemplateBitmap = null;
+        List<BitmapImage> sourceShieldBitmaps = null;
+        List<BitmapImage> convertedShieldBitmaps = null;
 
         Dictionary<PixelColor, List<Vector2>> sourceGrids = new Dictionary<PixelColor, List<Vector2>>();
         Dictionary<PixelColor, List<Vector2>> templateGrids = new Dictionary<PixelColor, List<Vector2>>();
 
         Image?[,]? shieldBitImagesTable;
+        BannerPresets currentBannerPreset = BannerPresets.None;
 
-        private void btn_openExplorer_shieldSourceTemplate(object sender, RoutedEventArgs e)
+        private void OpenExplorerForSourceTemplate(object sender, RoutedEventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Select an the shield source template";
@@ -39,19 +39,12 @@ namespace SevenStarsTools
                 "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                shieldSourceTemplateBitImage = new BitmapImage(new Uri(op.FileName));
-                shieldSourceTemplateBitImage.Freeze();
-                shieldSourceTemplate.Source = shieldSourceTemplateBitImage;
-                shieldSourceTemplate.Width = 128;
-                shieldSourceTemplate.Height = 128;
-
-                // Create source color/grid
-                sourceGrids = ImageUtils.GenerateColorGrid(sourceGrids, shieldSourceTemplateBitImage);
+                UpdateSourceTemplateImage(new BitmapImage(new Uri(op.FileName)));
             }
         }
 
 
-        private void btn_openExplorer_shieldTemplate(object sender, RoutedEventArgs e)
+        private void OpenExplorerForConversionTemplate(object sender, RoutedEventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Select an the shield source template";
@@ -60,20 +53,11 @@ namespace SevenStarsTools
                 "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                shieldSplitTemplateBitImage = new BitmapImage(new Uri(op.FileName));
-                shieldSplitTemplateBitImage.Freeze();
-                shieldTemplate.Source = shieldSplitTemplateBitImage;
-                shieldTemplate.Width = 128;
-                shieldTemplate.Height = 128;
-
-
-                // Create source color/grid
-                templateGrids = ImageUtils.GenerateColorGrid(templateGrids, shieldSplitTemplateBitImage);
-                App.CopyImageToClipboard(shieldSplitTemplateBitImage);
+                UpdateSplitTemplateImage(new BitmapImage(new Uri(op.FileName)));
             }
         }
 
-        private void btn_openExplorer_shieldFiles(object sender, RoutedEventArgs e)
+        private void OpenExplorerForShieldSources(object sender, RoutedEventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
             op.Multiselect = true;
@@ -83,22 +67,22 @@ namespace SevenStarsTools
                 "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                shieldBitImages = new List<BitmapImage>();
+                sourceShieldBitmaps = new List<BitmapImage>();
 
                 foreach(var filename in op.FileNames)
                 {
                     BitmapImage image = new BitmapImage(new Uri(filename));
                     image.Freeze();
-                    shieldBitImages.Add(image);
+                    sourceShieldBitmaps.Add(image);
                 }
             }
 
-            if(shieldBitImages.Count > 0)
+            if(sourceShieldBitmaps.Count > 0)
             {
                 int capColumns = 4;
                 int capRows = 4;
 
-                int maxRows = (int)Math.Round((shieldBitImages.Count / 4) + .5f);
+                int maxRows = (int)Math.Round((sourceShieldBitmaps.Count / 4) + .5f);
 
                 maxRows = Math.Min(capRows, maxRows);
 
@@ -122,9 +106,9 @@ namespace SevenStarsTools
                 sourceImageGrid.Children.Clear();
 
                 int count = 0;
-                for (int x = 0; x < shieldBitImagesTable.GetLength(0) && count < shieldBitImages.Count; x++)
+                for (int x = 0; x < shieldBitImagesTable.GetLength(0) && count < sourceShieldBitmaps.Count; x++)
                 {
-                    for (int y = 0; y < shieldBitImagesTable.GetLength(1) && count < shieldBitImages.Count; y++)
+                    for (int y = 0; y < shieldBitImagesTable.GetLength(1) && count < sourceShieldBitmaps.Count; y++)
                     {
                         Image? newImage = shieldBitImagesTable[x, y];
                         if(newImage == null)
@@ -132,7 +116,7 @@ namespace SevenStarsTools
                             newImage = new Image();
                         }
 
-                        BitmapImage bitImage = shieldBitImages[count];
+                        BitmapImage bitImage = sourceShieldBitmaps[count];
 
                         newImage.Source = bitImage;
                         newImage.Width = 128;
@@ -159,20 +143,20 @@ namespace SevenStarsTools
             }
         }
 
-        private void btnClick_generateShields(object sender, RoutedEventArgs e)
+        private void BeginShieldConversion(object sender, RoutedEventArgs e)
         {
             int count = 0;
-            if(convertedImages == null)
-                convertedImages = new List<BitmapImage>();
+            if(convertedShieldBitmaps == null)
+                convertedShieldBitmaps = new List<BitmapImage>();
             else
-                convertedImages.Clear();
+                convertedShieldBitmaps.Clear();
 
             gemeratedImageGrid.Children.Clear();
 
 
-            for (int x = 0; x < shieldBitImagesTable.GetLength(0) && count < shieldBitImages.Count; x++)
+            for (int x = 0; x < shieldBitImagesTable.GetLength(0) && count < sourceShieldBitmaps.Count; x++)
             {
-                for (int y = 0; y < shieldBitImagesTable.GetLength(1) && count < shieldBitImages.Count; y++)
+                for (int y = 0; y < shieldBitImagesTable.GetLength(1) && count < sourceShieldBitmaps.Count; y++)
                 {
                     Image? newImage = shieldBitImagesTable[x, y];
                     if (newImage == null)
@@ -180,8 +164,8 @@ namespace SevenStarsTools
                         newImage = new Image();
                     }
 
-                    BitmapImage bitImage = ImageUtils.Convert(shieldBitImages[count], sourceGrids, templateGrids);
-                    convertedImages.Add(bitImage);
+                    BitmapImage bitImage = ImageUtils.Convert(sourceShieldBitmaps[count], sourceGrids, templateGrids);
+                    convertedShieldBitmaps.Add(bitImage);
                     newImage.Source = bitImage;
                     newImage.Width = 128;
                     newImage.Height = 128;
@@ -205,7 +189,7 @@ namespace SevenStarsTools
         }
         private void btnClick_save(object sender, RoutedEventArgs e)
         {
-            if (convertedImages == null)
+            if (convertedShieldBitmaps == null)
             {
                 return;
             }
@@ -217,11 +201,11 @@ namespace SevenStarsTools
             {
                 int count = 0;
 
-                for (int x = 0; x < convertedImages.Count; x++)
+                for (int x = 0; x < convertedShieldBitmaps.Count; x++)
                 {
 
-                    string path = saveDialog.FolderName + $"/{shieldBitImages[x].UriSource.Segments.Last()}";
-                    ImageUtils.SaveBitmapImage(path, (BitmapImage)convertedImages[x]);
+                    string path = saveDialog.FolderName + $"/{sourceShieldBitmaps[x].UriSource.Segments.Last()}";
+                    ImageUtils.SaveBitmapImage(path, (BitmapImage)convertedShieldBitmaps[x]);
 
                     count++;
                     
@@ -234,5 +218,76 @@ namespace SevenStarsTools
             }
         }
 
+        private void BannerPresets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(bannerPresets != null)
+            {
+                ComboBoxItem currentItem = (ComboBoxItem)bannerPresets.SelectedItem;
+                String name = currentItem.Name;
+                currentBannerPreset = (BannerPresets)Enum.Parse(typeof(BannerPresets), name, true);
+
+                switch (currentBannerPreset)
+                {
+                    case BannerPresets.None:
+                        UpdateSourceTemplateImage(null);
+                        UpdateSplitTemplateImage(null);
+                        break;
+                    case BannerPresets.Kite:
+                        UpdateSourceTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/kite_source_template.png")));
+                        UpdateSplitTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/kite_split_template.png")));
+                        break;
+                    case BannerPresets.Heater:
+                        UpdateSourceTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/heater_source_template.png")));
+                        UpdateSplitTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/heater_split_template.png")));
+                        break;
+                    case BannerPresets.Round:
+                        UpdateSourceTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/round_source_template.png")));
+                        UpdateSplitTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/round_split_template.png")));
+                        break;
+                }
+            }
+        }
+
+        private void UpdateSourceTemplateImage(BitmapImage image)
+        {
+            if(image != null)
+            {
+                sourceTemplateBitmap = image;
+                sourceTemplateBitmap.Freeze();
+                shieldSourceTemplate.Source = sourceTemplateBitmap;
+                shieldSourceTemplate.Width = 128;
+                shieldSourceTemplate.Height = 128;
+
+                sourceGrids = ImageUtils.GenerateColorGrid(sourceGrids, sourceTemplateBitmap);
+            }
+            else // Clear
+            {
+                sourceTemplateBitmap = null;
+                if(shieldSourceTemplate != null)
+                    shieldSourceTemplate.Source = null;
+                sourceGrids.Clear();
+            }
+        }
+
+        private void UpdateSplitTemplateImage(BitmapImage image)
+        {
+            if (image != null)
+            {
+                conversionTemplateBitmap = image;
+                conversionTemplateBitmap.Freeze();
+                shieldTemplate.Source = conversionTemplateBitmap;
+                shieldTemplate.Width = 128;
+                shieldTemplate.Height = 128;
+
+                sourceGrids = ImageUtils.GenerateColorGrid(templateGrids, conversionTemplateBitmap);
+            }
+            else // Clear
+            {
+                conversionTemplateBitmap = null;
+                if (shieldTemplate != null)
+                    shieldTemplate.Source = null;
+                sourceGrids.Clear();
+            }
+        }
     }
 }

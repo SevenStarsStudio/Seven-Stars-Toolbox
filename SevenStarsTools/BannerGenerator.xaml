@@ -10,8 +10,17 @@
         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center">Banner Generator</TextBlock>
         <Line Width="256"  Height="3" Margin="0,42,0,0" X1="0" Y1="0" X2="254" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
 
-        <Button x:Name="btnOpenExplorerShieldSourceTemplate" Click="btn_openExplorer_shieldSourceTemplate" Content="Select Shield Source" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,50,0,0"/>
-        <Button x:Name="btnOpenExplorerShieldTemplate" Click="btn_openExplorer_shieldTemplate" Content="Select Shield Template" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,50,30,0"/>
+        <StackPanel Margin="10">
+            <ComboBox Name="bannerPresets" SelectionChanged="BannerPresets_SelectionChanged">
+                <ComboBoxItem Name="None" IsSelected="True">None</ComboBoxItem>
+                <ComboBoxItem Name="Kite">Kite</ComboBoxItem>
+                <ComboBoxItem Name="Heater">Heater</ComboBoxItem>
+                <ComboBoxItem Name="Round">Round</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <Button x:Name="btnSourceTemplate" Click="OpenExplorerForSourceTemplate" Content="Select Shield Source" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,50,0,0"/>
+        <Button x:Name="btnConversionTemplate" Click="OpenExplorerForConversionTemplate" Content="Select Shield Template" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,50,30,0"/>
         <Grid Background="#242221" Name="shieldSourceBackground" Margin="-256,90,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="128" Width="128">
             <Image Name="shieldSourceTemplate" Height="128" Width="128" HorizontalAlignment="Left" VerticalAlignment="Top" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
         </Grid>
@@ -20,7 +29,7 @@
         </Grid>
 
         <Line Width="512"  Height="1" Margin="0,230,0,0" X1="0" Y1="0" X2="512" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
-        <Button x:Name="btn_openExplorerShieldFiles" Click="btn_openExplorer_shieldFiles" Content="Select Shields" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,240,0,0"/>
+        <Button x:Name="btn_openExplorerShieldFiles" Click="OpenExplorerForShieldSources" Content="Select Shields" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,240,0,0"/>
 
         <Grid Background="#242221" Name="sourceImageGrid" Margin="0,280,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="256" Width="512">
             <!-- GENERATED - SOURCE IMAGES -->
@@ -28,7 +37,7 @@
 
         <Line Width="512"  Height="1" Margin="0,545,0,0" X1="0" Y1="0" X2="512" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
 
-        <Button x:Name="btn_generateShields" Click="btnClick_generateShields"  Content="Generate" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,553,0,0"/>
+        <Button x:Name="btn_generateShields" Click="BeginShieldConversion"  Content="Generate" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,553,0,0"/>
         <Grid Background="#242221" Name="gemeratedImageGrid" Margin="0,593,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="256" Width="512">
             <!-- GENERATED - CONVERTED IMAGES -->
         </Grid>
