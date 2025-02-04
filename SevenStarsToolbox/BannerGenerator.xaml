@@ -1,0 +1,157 @@
+﻿<Window x:Class="SevenStarsToolbox.BannerGenerator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SevenStarsToolbox"
+        
+        Title="Banner Generator" ResizeMode="NoResize" Width="850"  Background="#1b1a19" Icon="/icon.ico">
+    <Grid>
+        <StackPanel>
+            <TextBlock  HorizontalAlignment="Center">Banner Generator</TextBlock>
+            <Line Width="256"  Height="3" Margin="0,5,0,0" X1="0" Y1="0" X2="254" Y2="0"  HorizontalAlignment="Center"></Line>
+        </StackPanel>
+
+        <StackPanel Margin="10,64,0,0"  HorizontalAlignment="Left">
+            <TextBlock  HorizontalAlignment="Center">Options</TextBlock>
+            <ComboBox Name="bannerPresets"  SelectionChanged="BannerPresetSelectionUpdate" Margin="15, 15, 15,0" >
+                <ComboBox.Items>
+                    <ComboBoxItem Name="CUSTOM" IsSelected="True">Custom</ComboBoxItem>
+                    <ComboBoxItem Name="KITE_SHIELD">Kite Shield</ComboBoxItem>
+                    <ComboBoxItem Name="HEATER_SHIELD">Heater Shield</ComboBoxItem>
+                    <ComboBoxItem Name="ROUND_SHIELD">Round Shield</ComboBoxItem>
+                </ComboBox.Items>
+            </ComboBox>
+            <Button x:Name="source_btn" Click="OpenExplorerForSourceTemplate" Content="Select Base" Height="32" Width="256"  HorizontalAlignment="Center" Margin="15"/>
+            <Grid Height="128" Width="256">
+                <Button x:Name="copySource_btn" Click="CopySourceImage" Content="📂" Height="32" Width="32" VerticalAlignment="Top" Margin="164,0,0,0"/>
+                <Grid Background="#242221" Height="128" Width="128">
+                    <Image Name="shieldSourceTemplate" Height="128" Width="128" HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+                </Grid>
+            </Grid>
+
+            <Button x:Name="template_btn" Click="OpenExplorerForConversionTemplate" Content="Select Template" Height="32" Width="256"  HorizontalAlignment="Center" Margin="15"/>
+            <Grid Height="128" Width="256">
+                <Button x:Name="copyTemplate_btn" Click="CopyTemplateImage" Content="📂" Height="32" Width="32" VerticalAlignment="Top" Margin="164,0,0,0"/>
+                <Grid Background="#242221" Height="128" Width="128">
+                    <Image Name="shieldTemplate" Height="128" Width="128" HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+                </Grid>
+            </Grid>
+            
+            <Button x:Name="convert_btn" Click="BeginShieldConversion"  Content="Convert" Height="32" Width="256"  HorizontalAlignment="Center" Margin="10"/>
+            <Line Width="256"  Height="1" X1="0" Y1="0" X2="256" Y2="0" HorizontalAlignment="Center"></Line>
+            <Button x:Name="btnSave" Click="btnClick_save" Content="Save" Height="32" Width="256"  HorizontalAlignment="Center" Margin="10"/>
+            <CheckBox x:Name="onsave_explorer_checkbox" HorizontalAlignment="Center" Margin="0,0,0,10" IsChecked="True" Content="Open Explorer on Save" />
+        </StackPanel>
+        <StackPanel Margin="10, 64, 10 ,0"  HorizontalAlignment="Right">
+            <Button x:Name="btn_openExplorerShieldFiles" Click="OpenExplorerForShieldSources" Content="Select Items" Height="32" Width="256"  HorizontalAlignment="Center" Margin="0,0,0,0"/>
+            <Grid Background="#242221" Name="sourceImageGrid" Margin="0,15,0,0" HorizontalAlignment="Center" Height="256" Width="512">
+                <!-- GENERATED - SOURCE IMAGES -->
+            </Grid>
+
+            <Line Width="512"  Height="1" Margin="0,15,0,0" X1="0" Y1="0" X2="512" Y2="0" HorizontalAlignment="Center"></Line>
+
+            <Grid Background="#242221" Name="gemeratedImageGrid" HorizontalAlignment="Center" Height="256" Width="512" Margin="0,15,0,0">
+                <!-- GENERATED - CONVERTED IMAGES -->
+            </Grid>
+        </StackPanel>
+        <TextBlock x:Name="version" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10"></TextBlock>
+    </Grid>
+
+    <!-- STYLE -->
+    <Window.Resources>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Courier New"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+        </Style>
+
+        <Style TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="Foreground" Value="#edc591"/>
+            <Setter Property="Background" Value="#242221"/>
+            <Setter Property="BorderBrush" Value="#43413e"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#a1805e"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#43413e"/>
+
+                    <Setter Property="Foreground" Value="#a1805e"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+     
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="#edc591"/>
+            <Setter Property="Background" Value="#242221"/>
+            <Setter Property="BorderBrush" Value="#43413e"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSize" Value="18"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#a1805e"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#43413e"/>
+
+                    <Setter Property="Foreground" Value="#a1805e"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="#edc591" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="#edc591" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Foreground" Value="#edc591" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style TargetType="{x:Type Line}">
+            <Setter Property="Stroke" Value="#edc591" />
+        </Style>
+
+    </Window.Resources>
+</Window>

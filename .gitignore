@@ -1,7 +1,6 @@
 *.vsidx
-/SevenStarsTools/bin/*
+/SevenStarsToolbox/bin/*
 .vs\*
-SevenStarsTools/.vs/SevenStarsTools/v17/.suo
-/SevenStarsTools/.vs/SevenStarsTools
-/SevenStarsTools/.vs
-/SevenStarsTools/obj
+/SevenStarsToolbox/.vs
+/SevenStarsToolbox/obj
+/.vs
