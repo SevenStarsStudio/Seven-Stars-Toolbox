@@ -1,7 +1,10 @@
 ﻿using Microsoft.Win32;
+using System.Diagnostics;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using static SevenStarsTools.ImageUtils;
 
@@ -92,7 +95,7 @@ namespace SevenStarsTools
 
             if(shieldBitImages.Count > 0)
             {
-                int capColumns = 8;
+                int capColumns = 4;
                 int capRows = 4;
 
                 int maxRows = (int)Math.Round((shieldBitImages.Count / 4) + .5f);
@@ -132,9 +135,10 @@ namespace SevenStarsTools
                         BitmapImage bitImage = shieldBitImages[count];
 
                         newImage.Source = bitImage;
-                        newImage.Width = 64;
-                        newImage.Height = 64;
+                        newImage.Width = 128;
+                        newImage.Height = 128;
 
+                        RenderOptions.SetBitmapScalingMode(newImage, BitmapScalingMode.NearestNeighbor);
 
                         newImage.VerticalAlignment = VerticalAlignment.Top;
                         newImage.HorizontalAlignment = HorizontalAlignment.Left;
@@ -179,8 +183,10 @@ namespace SevenStarsTools
                     BitmapImage bitImage = ImageUtils.Convert(shieldBitImages[count], sourceGrids, templateGrids);
                     convertedImages.Add(bitImage);
                     newImage.Source = bitImage;
-                    newImage.Width = 64;
-                    newImage.Height = 64;
+                    newImage.Width = 128;
+                    newImage.Height = 128;
+
+                    RenderOptions.SetBitmapScalingMode(newImage, BitmapScalingMode.NearestNeighbor);
 
                     newImage.VerticalAlignment = VerticalAlignment.Top;
                     newImage.HorizontalAlignment = HorizontalAlignment.Left;
@@ -197,5 +203,36 @@ namespace SevenStarsTools
                 }
             }
         }
+        private void btnClick_save(object sender, RoutedEventArgs e)
+        {
+            if (convertedImages == null)
+            {
+                return;
+            }
+
+            OpenFolderDialog saveDialog = new OpenFolderDialog();
+            saveDialog.Title = "Save";
+
+            if (saveDialog.ShowDialog() == true)
+            {
+                int count = 0;
+
+                for (int x = 0; x < convertedImages.Count; x++)
+                {
+
+                    string path = saveDialog.FolderName + $"/{shieldBitImages[x].UriSource.Segments.Last()}";
+                    ImageUtils.SaveBitmapImage(path, (BitmapImage)convertedImages[x]);
+
+                    count++;
+                    
+                }
+
+                if (onsave_explorer_checkbox.IsChecked == true)
+                {
+                    Process.Start("explorer.exe", saveDialog.FolderName);
+                }
+            }
+        }
+
     }
 }

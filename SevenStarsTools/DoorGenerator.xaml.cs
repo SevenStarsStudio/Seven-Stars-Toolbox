@@ -152,8 +152,8 @@ namespace SevenStarsTools
                 {
                     for (int y = generatedImages.GetLength(1) - 1; y >= 0; y--)
                     {
-                        string path = saveDialog.FolderName + $"/{fileName.Text}{count}";
-                        ImageUtils.SaveBitmapImage(x, y, path, (BitmapImage)generatedImages[x, y]);
+                        string path = saveDialog.FolderName + $"/{fileName.Text}{count}.png";
+                        ImageUtils.SaveBitmapImage(path, (BitmapImage)generatedImages[x, y]);
 
                         count++;
                     }

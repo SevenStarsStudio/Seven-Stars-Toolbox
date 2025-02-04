@@ -33,6 +33,10 @@
             <!-- GENERATED - CONVERTED IMAGES -->
         </Grid>
 
+
+        <Button x:Name="btnSave" Click="btnClick_save" Content="Save" Height="32" Width="290" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,30"/>
+        <CheckBox x:Name="onsave_explorer_checkbox" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,10" IsChecked="True" Content="Open Explorer on Save" />
+
     </Grid>
 
     <!-- STYLE -->

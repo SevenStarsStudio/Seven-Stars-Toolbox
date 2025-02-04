@@ -136,10 +136,10 @@ namespace SevenStarsTools
             }
         }
 
-        public static void SaveBitmapImage(int x, int y, string path, BitmapImage bitmap)
+        public static void SaveBitmapImage(string path, BitmapImage bitmap)
         {
 
-            using (FileStream stream = File.Create(path + ".png"))
+            using (FileStream stream = File.Create(path))
             {
                 PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
                 pngEncoder.Frames.Clear();
