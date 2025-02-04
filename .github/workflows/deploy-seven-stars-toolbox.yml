@@ -25,7 +25,7 @@ jobs:
          run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
        
        - name: Deploying
-         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishedSingleFile=true --no-build
+         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
 
        - uses: actions/create-release@v1
          id: create_release
