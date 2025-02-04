@@ -21,9 +21,6 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: cleaning
-        run: dotnet nuget locals all --clear
-
       - name: Restoring
         run: dotnet restore ${{ env.PROJECT_PATH }} -r win-x64
 
