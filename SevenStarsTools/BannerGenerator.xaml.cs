@@ -28,7 +28,7 @@ namespace SevenStarsTools
         Dictionary<PixelColor, List<Vector2>> templateGrids = new Dictionary<PixelColor, List<Vector2>>();
 
         Image?[,]? shieldBitImagesTable;
-        BannerPresets currentBannerPreset = BannerPresets.Custom;
+        BannerPresets currentBannerPreset = BannerPresets.CUSTOM;
 
         private void OpenExplorerForSourceTemplate(object sender, RoutedEventArgs e)
         {
@@ -39,9 +39,9 @@ namespace SevenStarsTools
                 "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                if (currentBannerPreset != BannerPresets.Custom)
+                if (currentBannerPreset != BannerPresets.CUSTOM)
                 {
-                    currentBannerPreset = BannerPresets.Custom;
+                    currentBannerPreset = BannerPresets.CUSTOM;
                     bannerPresets.SelectedIndex = 0;
                 }
                 UpdateSourceTemplateImage(new BitmapImage(new Uri(op.FileName)));
@@ -70,9 +70,9 @@ namespace SevenStarsTools
                 "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                if(currentBannerPreset != BannerPresets.Custom)
+                if(currentBannerPreset != BannerPresets.CUSTOM)
                 {
-                    currentBannerPreset = BannerPresets.Custom;
+                    currentBannerPreset = BannerPresets.CUSTOM;
                     bannerPresets.SelectedIndex = 0;
                 }
                 UpdateSplitTemplateImage(new BitmapImage(new Uri(op.FileName)));
@@ -275,21 +275,21 @@ namespace SevenStarsTools
             {
                 ComboBoxItem currentItem = (ComboBoxItem)bannerPresets.SelectedItem;
                 String name = currentItem.Name;
-                currentBannerPreset = (BannerPresets)Enum.Parse(typeof(BannerPresets), name, true);
+                currentBannerPreset = (BannerPresets)Enum.Parse(typeof(BannerPresets), name.ToUpper(), true);
 
                 switch (currentBannerPreset)
                 {
-                    case BannerPresets.Custom:
+                    case BannerPresets.CUSTOM:
                         break;
-                    case BannerPresets.Kite:
+                    case BannerPresets.KITE_SHIELD:
                         UpdateSourceTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/kite_source_template.png")));
                         UpdateSplitTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/kite_split_template.png")));
                         break;
-                    case BannerPresets.Heater:
+                    case BannerPresets.HEATER_SHIELD:
                         UpdateSourceTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/heater_source_template.png")));
                         UpdateSplitTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/heater_split_template.png")));
                         break;
-                    case BannerPresets.Round:
+                    case BannerPresets.ROUND_SHIELD:
                         UpdateSourceTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/round_source_template.png")));
                         UpdateSplitTemplateImage(new BitmapImage(new Uri("pack://application:,,,/Assets/BannerPresets/round_split_template.png")));
                         break;

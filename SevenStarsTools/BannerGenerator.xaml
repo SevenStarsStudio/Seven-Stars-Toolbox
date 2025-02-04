@@ -16,10 +16,10 @@
             <TextBlock  HorizontalAlignment="Center">Options</TextBlock>
             <ComboBox Name="bannerPresets"  SelectionChanged="BannerPresetSelectionUpdate" Margin="15, 15, 15,0" >
                 <ComboBox.Items>
-                    <ComboBoxItem Name="Custom" IsSelected="True">Custom</ComboBoxItem>
-                    <ComboBoxItem Name="Kite">Kite</ComboBoxItem>
-                    <ComboBoxItem Name="Heater">Heater</ComboBoxItem>
-                    <ComboBoxItem Name="Round">Round</ComboBoxItem>
+                    <ComboBoxItem Name="CUSTOM" IsSelected="True">Custom</ComboBoxItem>
+                    <ComboBoxItem Name="KITE_SHIELD">Kite Shield</ComboBoxItem>
+                    <ComboBoxItem Name="HEATER_SHIELD">Heater Shield</ComboBoxItem>
+                    <ComboBoxItem Name="ROUND_SHIELD">Round Shield</ComboBoxItem>
                 </ComboBox.Items>
             </ComboBox>
             <Button x:Name="source_btn" Click="OpenExplorerForSourceTemplate" Content="Select Base" Height="32" Width="256"  HorizontalAlignment="Center" Margin="15"/>
@@ -65,12 +65,6 @@
             <Setter Property="FontStyle" Value="Normal"/>
         </Style>
 
-        <Style TargetType="{x:Type ComboBox}">
-
-
-        </Style>
-        
-        
         <Style TargetType="{x:Type ComboBoxItem}">
             <Setter Property="Foreground" Value="#edc591"/>
             <Setter Property="Background" Value="#242221"/>
