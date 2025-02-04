@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:SevenStarsTools"
     Topmost="True"
-    Title="Seven Stars Toolbox" ResizeMode="NoResize" Height="270"  Width="278" Icon="/icon.ico" Background="#1b1a19">
+    Title="Seven Stars Toolbox" ResizeMode="NoResize" Height="270"  Width="278"  Background="#1b1a19" Icon="/icon.ico">
 
     <!-- Main Grid -->
     <Grid>

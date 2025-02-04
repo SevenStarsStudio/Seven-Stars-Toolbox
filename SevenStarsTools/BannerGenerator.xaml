@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SevenStarsTools"
         
-        Title="Banner Generator" ResizeMode="NoResize" Height="1000" Width="600" Icon="/icon.ico" Background="#1b1a19" >
+        Title="Banner Generator" ResizeMode="NoResize" Height="1000" Width="600"  Background="#1b1a19" Icon="/icon.ico" >
     <Grid>
         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center">Banner Generator</TextBlock>
         <Line Width="256"  Height="3" Margin="0,42,0,0" X1="0" Y1="0" X2="254" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
