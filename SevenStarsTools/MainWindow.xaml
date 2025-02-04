@@ -5,31 +5,34 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:SevenStarsTools"
-    Title="Seven Stars Studio" Height="300" MinHeight="200" MaxHeight="700" Width="278" MinWidth="278" MaxWidth="278" Icon="/icon.ico" Background="#1b1a19">
+    Topmost="True"
+    Title="Seven Stars Toolbox" ResizeMode="NoResize" Height="270"  Width="278" Icon="/icon.ico" Background="#1b1a19">
 
     <!-- Main Grid -->
     <Grid>
-        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center">Seven Stars Tools</TextBlock>
-        <Line Width="256"  Height="3" Margin="0,42,0,0" X1="0" Y1="0" X2="254" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
-        <Button x:Name="btnOpenBannerGenerator" Click="btnClick_BannerGenerator"  Content="Banner Generator" RenderTransformOrigin="1.2,0.7" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,50,0,0"/>
-        <Button x:Name="btnOpenDoorMaker" Click="btnClick_DoorMaker"  Content="Door Generator" RenderTransformOrigin="1.2,0.7" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3,87,0,0"/>
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center">Seven Stars Toolbox</TextBlock>
+        <Line Width="256"  Height="1" Margin="0,42,0,0" X1="0" Y1="0" X2="254" Y2="0" VerticalAlignment="Top" HorizontalAlignment="Center"></Line>
+        <Button x:Name="btnOpenBannerGenerator" Click="btnClick_BannerGenerator"  Content="Banner Generator [WIP]" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,50,0,0"/>
+        <Button x:Name="btnOpenDoorMaker" Click="btnClick_DoorMaker"  Content="Door Generator" Height="32" Width="256" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,87,0,0"/>
+
+        <Button x:Name="btnCloseAll" Click="btnClick_CloseAll" Content="Close All" Height="32" Width="256" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+        <Line Width="256"  Height="1" Margin="0,0,0,45" X1="0" Y1="0" X2="254" Y2="0" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Line>
+
     </Grid>
 
-
-    <!-- Styles -->
+    <!-- STYLE -->
     <Window.Resources>
         <Style TargetType="{x:Type Window}">
-            <Setter Property="Background" Value="#1b1a19"/>
-            <Setter Property="Foreground" Value="#1b1a19"/>
-            <Setter Property="FontSize" Value="18" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="Courier New"/>
             <Setter Property="FontStyle" Value="Normal"/>
         </Style>
 
 
         <Style TargetType="{x:Type Button}">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Foreground" Value="#edc591"/>
-            <Setter Property="Background" Value="#1b1a19"/>
+            <Setter Property="Background" Value="#242221"/>
             <Setter Property="BorderBrush" Value="#43413e"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="FontSize" Value="18"/>
@@ -38,10 +41,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}">
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -67,8 +70,19 @@
             <Setter Property="FontSize" Value="24" />
         </Style>
 
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="#edc591" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Foreground" Value="#edc591" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
         <Style TargetType="{x:Type Line}">
             <Setter Property="Stroke" Value="#edc591" />
         </Style>
+
     </Window.Resources>
 </Window>
