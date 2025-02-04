@@ -3,6 +3,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Color = System.Drawing.Color;
@@ -106,9 +107,10 @@ namespace SevenStarsTools
                 for (int i = 0; i < sourcePositions.Count; i++)
                 {
                     Vector2 sourcePosition = sourcePositions[i];
-                    ImageUtils.PixelColor pixelColor = pixels[(int)sourcePosition.X, (int)sourcePosition.Y];
+                    PixelColor pixelColor = pixels[(int)sourcePosition.X, (int)sourcePosition.Y];
 
                     Vector2 templatePosition = templatePositions[i];
+
 
                     myBitmap.SetPixel((int)templatePosition.X, (int)templatePosition.Y, Color.FromArgb(pixelColor.Alpha, pixelColor.Red, pixelColor.Green, pixelColor.Blue));
                 }
@@ -117,6 +119,7 @@ namespace SevenStarsTools
             return GetBitmapSource(myBitmap);
         }
 
+        
 
         public static BitmapImage GetBitmapSource(Bitmap bitmap)
         {
