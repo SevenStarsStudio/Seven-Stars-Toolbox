@@ -12,9 +12,9 @@ jobs:
   deploy:
     runs-on: windows-latest
     steps:
-       - uses: actions/checkout@v2
+       - uses: actions/checkout@v4
        
-       - uses: actions/setup-dotnet@v1
+       - uses: actions/setup-dotnet@v4
          with:
            dotnet-versions: 8.0.x
 
@@ -38,7 +38,7 @@ jobs:
            tag_name: ${{ github.ref }}
            release_name: ${{ github.ref }}
 
-       - uses: csexton/release-asset-action@v2
+       - uses: csexton/release-asset-action@v3
          with:
            github-token: ${{ secrets.GITHUB_TOKEN }}
            pattern: SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*.exe
