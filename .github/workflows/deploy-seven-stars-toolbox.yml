@@ -1,11 +1,11 @@
 name: Deploy Seven Stars Toolbox
-run-name: Deploy Seven Stars Toolbox ${{ github.action_ref }} by ${{ github.actor }}
+run-name: Deploy Seven Stars Toolbox ${{ github.ref }} by ${{ github.actor }}
 
 on:
   push:
     tags:
       - "seven-stars-toolbox/v*"
-  workflow_dispatch:
+#  workflow_dispatch:
 
 
 env:
@@ -48,17 +48,17 @@ jobs:
 #          release-url: ${{ steps.create_release.outputs.upload_url }}
       
       - name: Release (auto)
-        if: ${{ github.event_name != 'workflow_dispatch' }}
+#        if: ${{ github.event_name != 'workflow_dispatch' }}
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ github.action_ref }}
+          name: ${{ github.ref }}
           tag_name: ${{ github.ref }}
           files: ${{ github.workspace }}/SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*.exe
       
-      - name: Release (manually)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        uses: softprops/action-gh-release@v2
-        with:
-          name: ${{ github.action_ref }}
-          tag_name: ${{ github.action_ref }}
-          files: ${{ github.workspace }}/SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*.exe
+#      - name: Release (manually)
+#        if: ${{ github.event_name == 'workflow_dispatch' }}
+#        uses: softprops/action-gh-release@v2
+#        with:
+#          name: ${{ github.action_ref }}
+#          tag_name: ${{ github.action_ref }}
+#          files: ${{ github.workspace }}/SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*.exe
