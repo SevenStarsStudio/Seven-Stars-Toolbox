@@ -14,34 +14,42 @@ jobs:
   deploy:
     runs-on: windows-latest
     steps:
-       - uses: actions/checkout@v4
-       
-       - uses: actions/setup-dotnet@v4
-         with:
-           dotnet-versions: 8.0.x
+      - uses: actions/checkout@v4
+        
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-       - name: cleaning
-         run: dotnet nuget locals all --clear
+      - name: cleaning
+        run: dotnet nuget locals all --clear
 
-       - name: Restoring
-         run: dotnet restore ${{ env.PROJECT_PATH }} -r win-x64
+      - name: Restoring
+        run: dotnet restore ${{ env.PROJECT_PATH }} -r win-x64
   
-       - name: Building
-         run: dotnet build ${{ env.PROJECT_PATH }} -c Release -r win-x64 --no-restore
+      - name: Building
+        run: dotnet build ${{ env.PROJECT_PATH }} -c Release -r win-x64 --no-restore
        
-       - name: Deploying
-         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build -p:IncludeNativeLibrariesForSelfExtract=true
+      - name: Deploying
+        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build -p:IncludeNativeLibrariesForSelfExtract=true
 
-       - uses: actions/create-release@v1
-         id: create_release
-         env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         with:
-           tag_name: ${{ github.ref }}
-           release_name: ${{ github.ref }}
-
-       - uses: csexton/release-asset-action@v3
-         with:
-           github-token: ${{ secrets.GITHUB_TOKEN }}
-           pattern: SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*.exe
-           release-url: ${{ steps.create_release.outputs.upload_url }}
+#      - uses: actions/create-release@v1
+#        id: create_release
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ github.ref }}
+#          release_name: ${{ github.ref }}
+#
+#      - uses: csexton/release-asset-action@v3
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          pattern: SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*.exe
+#          release-url: ${{ steps.create_release.outputs.upload_url }}
+      
+      - name: Release
+        id: release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref }}
+          tag_name: ${{ github.ref }}
+          files: ${{ github.workspace }}/SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*.exe
