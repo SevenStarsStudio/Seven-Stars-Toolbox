@@ -24,10 +24,10 @@ jobs:
          run: dotnet nuget locals all --clear
 
        - name: Restoring
-         run: dotnet restore ${{ env.PROJECT_PATH }}
+         run: dotnet restore ${{ env.PROJECT_PATH }} -r win-x64
   
        - name: Building
-         run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
+         run: dotnet build ${{ env.PROJECT_PATH }} -c Release -r win-x64 --no-restore
        
        - name: Deploying
          run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build -p:IncludeNativeLibrariesForSelfExtract=true
