@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - "seven-stars-toolbox/v*"
+  workflow_dispatch:
+
 
 env:
   PROJECT_PATH: SevenStarsToolbox/SevenStarsToolbox.csproj
