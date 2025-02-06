@@ -46,8 +46,12 @@ jobs:
 #          pattern: SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*.exe
 #          release-url: ${{ steps.create_release.outputs.upload_url }}
       
+      - name: Upload executive files
+        uses: actions/upload-artifact@v4
+        with:
+          path: ${{ github.workspace }}/SevenStarsToolbox/bin/Release/net8.0-windows/win-x64/publish/*.exe
+      
       - name: Release
-        id: release
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ github.ref }}
