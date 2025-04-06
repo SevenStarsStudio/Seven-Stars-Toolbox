@@ -247,6 +247,7 @@ namespace SevenStarsToolbox
             {
                 MessageBox.Show("Error : Source and Template images might not have the same colors", "Banner Generator - Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
+            btnSave.IsEnabled = convertedShieldBitmaps.Count > 0;
         }
         private void btnClick_save(object sender, RoutedEventArgs e)
         {
@@ -269,7 +270,6 @@ namespace SevenStarsToolbox
                     ImageUtils.SaveBitmapImage(path, (BitmapImage)convertedShieldBitmaps[x]);
 
                     count++;
-                    
                 }
 
                 if (onsave_explorer_checkbox.IsChecked == true)

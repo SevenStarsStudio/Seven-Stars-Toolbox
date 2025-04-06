@@ -6,15 +6,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:SevenStarsToolbox"
     Topmost="True"
-    Title="Seven Stars Toolbox" ResizeMode="NoResize" Height="312"  Width="276" Background="#1b1a19" Icon="/icon.ico">
+    Title="Seven Stars Toolbox" ResizeMode="NoResize" Height="364"  Width="276" Background="{StaticResource Background}" Icon="/icon.ico">
 
     <!-- Main Grid -->
     <Grid>
         <StackPanel Margin="10">
             <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center">Seven Stars Toolbox</TextBlock>
             <Line Width="256"  Height="1" Margin="0,10,0,0" X1="0" Y1="0" X2="256" Y2="0"></Line>
-            <Button x:Name="btnOpenBannerGenerator" Click="btnClick_BannerGenerator"  Content="Banner Generator" Height="32" Width="auto" Margin="0,10,0,0"/>
-            <Button x:Name="btnOpenDoorMaker" Click="btnClick_DoorMaker"  Content="Door Generator" Height="32" Width="auto" Margin="0,10,0,0"/>
+            <Button x:Name="btnOpenBannerGenerator" FontSize="15" Click="OpenBannerGenerator"  Content="Banner Generator" Height="32" Width="auto" Margin="0,10,0,0"/>
+            <Button x:Name="btnOpenDoorGenerator" FontSize="15" Click="OpenDoorGenerator"  Content="Door Generator" Height="32" Width="auto" Margin="0,10,0,0"/>
+            <Button x:Name="btnOpenBlockSetGenerator" Click="OpenBlockSetGenerator"  Content="Block Set Generator (WIP)" Height="32" Width="auto" Margin="0,10,0,0"/>
 
             <Line Width="256"  Height="1" Margin="0,30,0,10" X1="0" Y1="0" X2="256" Y2="0" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Line>
             <Button x:Name="btnReportIssue" Click="ReportIssue" Content="Report Issue" Height="32" Width="auto" Margin="0,0,0,0"/>
@@ -22,70 +23,5 @@
         </StackPanel>
         <TextBlock x:Name="version" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10"></TextBlock>
     </Grid>
-
-    <!-- STYLE -->
-    <Window.Resources>
-        <Style TargetType="{x:Type Window}">
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="Courier New"/>
-            <Setter Property="FontStyle" Value="Normal"/>
-        </Style>
-
-
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Foreground" Value="#edc591"/>
-            <Setter Property="Background" Value="#242221"/>
-            <Setter Property="BorderBrush" Value="#43413e"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="FontSize" Value="18"/>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#a1805e"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#43413e"/>
-
-                    <Setter Property="Foreground" Value="#a1805e"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="#edc591" />
-            <Setter Property="FontSize" Value="24" />
-        </Style>
-
-        <Style TargetType="{x:Type Label}">
-            <Setter Property="Foreground" Value="#edc591" />
-            <Setter Property="FontSize" Value="24" />
-        </Style>
-
-        <Style TargetType="{x:Type CheckBox}">
-            <Setter Property="Foreground" Value="#edc591" />
-            <Setter Property="FontSize" Value="16" />
-        </Style>
-
-        <Style TargetType="{x:Type Line}">
-            <Setter Property="Stroke" Value="#edc591" />
-        </Style>
-
-    </Window.Resources>
 </Window>
+

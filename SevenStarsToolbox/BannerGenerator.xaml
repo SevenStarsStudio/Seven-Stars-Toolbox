@@ -14,7 +14,7 @@
 
         <StackPanel Margin="10,64,0,0"  HorizontalAlignment="Left">
             <TextBlock  HorizontalAlignment="Center">Options</TextBlock>
-            <ComboBox Name="bannerPresets"  SelectionChanged="BannerPresetSelectionUpdate" Margin="15, 15, 15,0" >
+            <ComboBox Name="bannerPresets" SelectionChanged="BannerPresetSelectionUpdate" Margin="15, 15, 15,0" >
                 <ComboBox.Items>
                     <ComboBoxItem Name="CUSTOM" IsSelected="True">Custom</ComboBoxItem>
                     <ComboBoxItem Name="KITE_SHIELD">Kite Shield</ComboBoxItem>
@@ -37,10 +37,10 @@
                     <Image Name="shieldTemplate" Height="128" Width="128" HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
                 </Grid>
             </Grid>
-            
+
             <Button x:Name="convert_btn" Click="BeginShieldConversion"  Content="Convert" Height="32" Width="256"  HorizontalAlignment="Center" Margin="10"/>
             <Line Width="256"  Height="1" X1="0" Y1="0" X2="256" Y2="0" HorizontalAlignment="Center"></Line>
-            <Button x:Name="btnSave" Click="btnClick_save" Content="Save" Height="32" Width="256"  HorizontalAlignment="Center" Margin="10"/>
+            <Button x:Name="btnSave" Click="btnClick_save" IsEnabled="False" Content="Save" Height="32" Width="256"  HorizontalAlignment="Center" Margin="10"/>
             <CheckBox x:Name="onsave_explorer_checkbox" HorizontalAlignment="Center" Margin="0,0,0,10" IsChecked="True" Content="Open Explorer on Save" />
         </StackPanel>
         <StackPanel Margin="10, 64, 10 ,0"  HorizontalAlignment="Right">
@@ -57,101 +57,4 @@
         </StackPanel>
         <TextBlock x:Name="version" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10"></TextBlock>
     </Grid>
-
-    <!-- STYLE -->
-    <Window.Resources>
-        <Style TargetType="{x:Type Window}">
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="Courier New"/>
-            <Setter Property="FontStyle" Value="Normal"/>
-        </Style>
-
-        <Style TargetType="{x:Type ComboBoxItem}">
-            <Setter Property="Foreground" Value="#edc591"/>
-            <Setter Property="Background" Value="#242221"/>
-            <Setter Property="BorderBrush" Value="#43413e"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBoxItem">
-                        <Border x:Name="border"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#a1805e"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#43413e"/>
-
-                    <Setter Property="Foreground" Value="#a1805e"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-     
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Foreground" Value="#edc591"/>
-            <Setter Property="Background" Value="#242221"/>
-            <Setter Property="BorderBrush" Value="#43413e"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="FontSize" Value="18"/>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#a1805e"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#43413e"/>
-
-                    <Setter Property="Foreground" Value="#a1805e"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="#edc591" />
-            <Setter Property="FontSize" Value="24" />
-        </Style>
-
-        <Style TargetType="{x:Type Label}">
-            <Setter Property="Foreground" Value="#edc591" />
-            <Setter Property="FontSize" Value="24" />
-        </Style>
-
-        <Style TargetType="{x:Type CheckBox}">
-            <Setter Property="Foreground" Value="#edc591" />
-            <Setter Property="FontSize" Value="16" />
-        </Style>
-
-        <Style TargetType="{x:Type Line}">
-            <Setter Property="Stroke" Value="#edc591" />
-        </Style>
-
-    </Window.Resources>
 </Window>

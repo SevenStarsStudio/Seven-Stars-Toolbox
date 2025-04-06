@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Assets\BlockSetItems\**" />
+    <EmbeddedResource Remove="Assets\BlockSetItems\**" />
+    <None Remove="Assets\BlockSetItems\**" />
+    <Page Remove="Assets\BlockSetItems\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\BannerPresets\heater_source_template.png" />
     <None Remove="Assets\BannerPresets\heater_split_template.png" />
     <None Remove="Assets\BannerPresets\kite_source_template.png" />

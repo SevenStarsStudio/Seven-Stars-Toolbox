@@ -12,12 +12,18 @@
     <Compile Update="BannerGenerator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="BlockSetGenerator.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="DoorGenerator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="BannerGenerator.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="BlockSetGenerator.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="DoorGenerator.xaml">

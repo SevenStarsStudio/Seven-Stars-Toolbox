@@ -142,13 +142,21 @@ namespace SevenStarsToolbox
 
         public static void SaveBitmapImage(string path, BitmapImage bitmap)
         {
-
-            using (FileStream stream = File.Create(path))
+            try
             {
-                PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
-                pngEncoder.Frames.Clear();
-                pngEncoder.Frames.Add(BitmapFrame.Create(bitmap));
-                pngEncoder.Save(stream);
+                using (FileStream stream = File.Create(path))
+                {
+                    PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
+                    pngEncoder.Frames.Clear();
+                    pngEncoder.Frames.Add(BitmapFrame.Create(bitmap));
+                    pngEncoder.Save(stream);
+                } 
+            }
+            catch (IOException exception)
+            {
+                String title = "Seven Stars Toolbox - Error while saving";
+                String message = $"Exception message : \n\r{exception.Message}";
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

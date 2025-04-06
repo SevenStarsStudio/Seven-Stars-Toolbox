@@ -16,17 +16,19 @@ namespace SevenStarsToolbox
             version.Text = App.VERSION;
         }
 
-        private void btnClick_DoorMaker(object sender, RoutedEventArgs e)
-        {
-            CreateNewWindow<DoorGenerator>();
-        }
-
-        private void btnClick_BannerGenerator(object sender, RoutedEventArgs e)
+        private void OpenBannerGenerator(object sender, RoutedEventArgs e)
         {
             CreateNewWindow<BannerGenerator>();
         }
+        private void OpenDoorGenerator(object sender, RoutedEventArgs e)
+        {
+            CreateNewWindow<DoorGenerator>();
+        }
+        private void OpenBlockSetGenerator(object sender, RoutedEventArgs e)
+        {
+            CreateNewWindow<BlockSetGenerator>();
+        }
 
-        
 
         private void ReportIssue(object sender, RoutedEventArgs e)
         {
